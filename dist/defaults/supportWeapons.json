@@ -1,0 +1,167 @@
+[
+    {
+        "id": 3,
+        "name": "Stalwart",
+        "urls": [
+            {
+                "name": "Wiki",
+                "url": "https://helldivers.fandom.com/wiki/M-105_Stalwart"
+            }
+        ],
+        "type": "LMG",
+        "stats": [
+        
+            {
+                "factionId": 1,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 4
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 5
+                    }
+
+                ]
+            },
+            {
+                "factionId": 2,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 3
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 5
+                    }
+                ]
+            }
+        
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Quasar Cannon",
+        "urls": [
+            {
+                "name": "Wiki",
+                "url": "https://helldivers.fandom.com/wiki/LAS-99_Quasar_Cannon"
+            }
+        ],
+        "type": "Energy Launcher",
+        "stats": [
+        
+            {
+                "factionId": 1,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 2
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 0
+                    }
+
+                ]
+            },
+            {
+                "factionId": 2,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 2
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 0
+                    }
+
+                ]
+            }
+        
+        ]
+    }
+]

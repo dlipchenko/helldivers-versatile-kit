@@ -1,0 +1,166 @@
+[
+    {
+        "id": 4,
+        "name": "G-16 Impact",
+        "urls": [
+            {
+                "name": "Wiki",
+                "url": "https://helldivers.fandom.com/wiki/Grenades_(Helldivers_2)"
+            }
+        ],
+        "type": "Impact Grenade",
+        "stats": [
+        
+            {
+                "factionId": 1,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 3
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 4
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 0
+                    }
+                ]
+            },
+            {
+                "factionId": 2,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 3
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 4
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 0
+                    }
+                ]
+            }
+        
+        ]
+    },
+    {
+        "id": 6,
+        "name": "Smoke Grenade",
+        "urls": [
+            {
+                "name": "Wiki",
+                "url": "https://helldivers.fandom.com/wiki/Grenades_(Helldivers_2)"
+            }
+        ],
+        "type": "Concealment",
+        "stats": [
+        
+            {
+                "factionId": 1,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 5
+                    }
+
+                ]
+            },
+            {
+                "factionId": 2,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 5
+                    }
+
+                ]
+            }
+        
+        ]
+    }
+]

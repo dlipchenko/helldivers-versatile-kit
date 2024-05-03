@@ -127,8 +127,6 @@ export default {
         path = window.location.href.split('github.io/')[1]
         if (path.includes('?')) 
           path = path.split('?')[0]
-        if (path.includes('/')) 
-          path = path.split('/')[0]
         console.log('path: ' + path);
       }
       console.log('path: ' + path);

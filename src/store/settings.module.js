@@ -10,8 +10,8 @@ export default {
     }
   },
   actions: {
-    setUrlPath({ commit }) {
-      commit('storeUrlPath')
+    setUrlPath({ commit }, data) {
+      commit('storeUrlPath', data)
     }
   },
 

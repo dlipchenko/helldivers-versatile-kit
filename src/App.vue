@@ -121,13 +121,14 @@ export default {
       let grenades = null;
       let factions = null;
       let categories = null;
-      console.log(window.location.href);
       this.$store.dispatch('settings/setUrlPath', '')
+      let path = ''
       if (window.location.href.includes('github.io/')) {
-        this.$store.dispatch('settings/setUrlPath', window.location.href.split('github.io/')[1])
-        if (this.urlPath.includes('?')) 
-          this.$store.dispatch('settings/setUrlPath', this.urlPath.split('?')[0])
+        path = window.location.href.split('github.io/')[1]
+        if (path.includes('?')) 
+          path = path.split('?')[0]
       }
+      this.$store.dispatch('settings/setUrlPath', path)
       await Promise.all([
         primaryWeapons = this.fetchJson(`${this.urlPath}defaults/primaryWeapons.json`),
         secondaryWeapons = this.fetchJson(`${this.urlPath}defaults/secondaryWeapons.json`),

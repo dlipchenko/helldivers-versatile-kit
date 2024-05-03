@@ -119,14 +119,21 @@ export default {
       let grenades = null;
       let factions = null;
       let categories = null;
+      console.log(window.location.href);
+      let path = ''
+      if (window.location.href.includes('/')) {
+        path = window.location.href.split('/')[1]
+        if (path.includes('?')) path = path.split('?')[0]
+        path += '/'
+      }
       await Promise.all([
-        primaryWeapons = this.fetchJson('defaults/primaryWeapons.json'),
-        secondaryWeapons = this.fetchJson('defaults/secondaryWeapons.json'),
-        supportWeapons = this.fetchJson('defaults/supportWeapons.json'),
-        backpacks = this.fetchJson('defaults/backpacks.json'),
-        grenades = this.fetchJson('defaults/grenades.json'),
-        factions = this.fetchJson('defaults/factions.json'),
-        categories = this.fetchJson('defaults/categories.json'),
+        primaryWeapons = this.fetchJson(`${path}defaults/primaryWeapons.json`),
+        secondaryWeapons = this.fetchJson(`${path}defaults/secondaryWeapons.json`),
+        supportWeapons = this.fetchJson(`${path}defaults/supportWeapons.json`),
+        backpacks = this.fetchJson(`${path}defaults/backpacks.json`),
+        grenades = this.fetchJson(`${path}defaults/grenades.json`),
+        factions = this.fetchJson(`${path}defaults/factions.json`),
+        categories = this.fetchJson(`${path}defaults/categories.json`),
       ]).then(results => {
         [primaryWeapons, secondaryWeapons, supportWeapons, backpacks, grenades, factions, categories] = results
       });

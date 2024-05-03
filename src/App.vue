@@ -30,7 +30,7 @@
           :style="`cursor: pointer; width: 300px; ${faction.id == storeFaction.id ? 'border-bottom: 3px dashed rgb(200,200,0)' : ''}`"
           @click="selectedFaction = faction"
           >
-          <v-img height="100%" :src="`${faction.tabImage}`"></v-img>
+          <v-img height="100%" :src="`${this.urlPath}${faction.tabImage}`"></v-img>
         </div>
       </div>
 
@@ -93,6 +93,8 @@ export default {
       factions: (state) => state.types.factions,
       storeFaction: (state) => state.types.selectedFaction,
       categories: (state) => state.types.categories,
+      
+      urlPath: (state) => state.settings.urlPath,
     }),
     selectedFaction: {
       get() {
@@ -120,20 +122,20 @@ export default {
       let factions = null;
       let categories = null;
       console.log(window.location.href);
-      let path = ''
+      this.$store.dispatch('settings/setUrlPath', '')
       if (window.location.href.includes('github.io/')) {
-        path = window.location.href.split('github.io/')[1]
-        if (path.includes('?')) path = path.split('?')[0]
-        path += '/'
+        this.$store.dispatch('settings/setUrlPath', window.location.href.split('github.io/')[1])
+        if (this.urlPath.includes('?')) 
+          this.$store.dispatch('settings/setUrlPath', this.urlPath.split('?')[0])
       }
       await Promise.all([
-        primaryWeapons = this.fetchJson(`${path}defaults/primaryWeapons.json`),
-        secondaryWeapons = this.fetchJson(`${path}defaults/secondaryWeapons.json`),
-        supportWeapons = this.fetchJson(`${path}defaults/supportWeapons.json`),
-        backpacks = this.fetchJson(`${path}defaults/backpacks.json`),
-        grenades = this.fetchJson(`${path}defaults/grenades.json`),
-        factions = this.fetchJson(`${path}defaults/factions.json`),
-        categories = this.fetchJson(`${path}defaults/categories.json`),
+        primaryWeapons = this.fetchJson(`${this.urlPath}defaults/primaryWeapons.json`),
+        secondaryWeapons = this.fetchJson(`${this.urlPath}defaults/secondaryWeapons.json`),
+        supportWeapons = this.fetchJson(`${this.urlPath}defaults/supportWeapons.json`),
+        backpacks = this.fetchJson(`${this.urlPath}defaults/backpacks.json`),
+        grenades = this.fetchJson(`${this.urlPath}defaults/grenades.json`),
+        factions = this.fetchJson(`${this.urlPath}defaults/factions.json`),
+        categories = this.fetchJson(`${this.urlPath}defaults/categories.json`),
       ]).then(results => {
         [primaryWeapons, secondaryWeapons, supportWeapons, backpacks, grenades, factions, categories] = results
       });

@@ -1,0 +1,167 @@
+[
+    {
+        "id": 1,
+        "name": "Liberator",
+        "imageSource": "images/primaryWeapons/liberator.png",
+        "urls": [
+            {
+                "name": "Wiki",
+                "url": "https://helldivers.fandom.com/wiki/All_Weapons_(Helldivers_2)"
+            }
+        ],
+        "type": "Assault Rifle",
+        "stats": [
+            {
+                "factionId": 1,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 4
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 3
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 3
+                    }
+
+                ]
+            },
+            {
+                "factionId": 2,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 3
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 3
+                    }
+
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "SG-8 Punisher",
+        "urls": [
+            {
+                "name": "Wiki",
+                "url": "https://helldivers.fandom.com/wiki/SG-8_Punisher_(Helldivers_2)"
+            }
+        ],
+        "type": "Shotgun (buckshot)",
+        "stats": [
+            
+            {
+                "factionId": 1,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 3
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 3
+                    }
+
+                ]
+            },
+            {
+                "factionId": 2,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 3
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 3
+                    }
+
+                ]
+            }
+        
+        ]
+    }
+]

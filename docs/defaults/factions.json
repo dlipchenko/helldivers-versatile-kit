@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "Terminids",
+        "tabImage": "/images/terminid.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Automatons"   ,
+        "tabImage": "/images/automaton.jpg"    
+    }
+]

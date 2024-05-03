@@ -25,12 +25,13 @@
         <div 
           v-for="faction in factions" 
           :key="`selected-faction-${faction.id}`" 
-          class="pa-0" 
+          class="pa-0 d-flex justify-center" 
           :value="faction.id" 
-          :style="`cursor: pointer; width: 300px; ${faction.id == storeFaction.id ? 'border-bottom: 3px dashed rgb(200,200,0)' : ''}`"
+          :style="`background-image: url(${faction.tabImage}); background-size: cover; background-position: center; cursor: pointer; width: 300px; ${faction.id == storeFaction.id ? 'border-bottom: 3px dashed rgb(200,200,0)' : ''}`"
           @click="selectedFaction = faction"
-          >
-          <v-img height="100%" :src="`${urlPath}${faction.tabImage}`"></v-img>
+        >
+          <!--<v-img height="100%" :src="`${faction.tabImage}`" />-->
+          <span class="text-h4" style="color: rgb(255,255,0);">{{ faction.name }}</span>
         </div>
       </div>
 

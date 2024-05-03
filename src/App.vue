@@ -30,7 +30,7 @@
           :style="`cursor: pointer; width: 300px; ${faction.id == storeFaction.id ? 'border-bottom: 3px dashed rgb(200,200,0)' : ''}`"
           @click="selectedFaction = faction"
           >
-          <v-img height="100%" :src="`${this.urlPath}${faction.tabImage}`"></v-img>
+          <v-img height="100%" :src="`${urlPath}${faction.tabImage}`"></v-img>
         </div>
       </div>
 

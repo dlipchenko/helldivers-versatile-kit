@@ -121,8 +121,8 @@ export default {
       let categories = null;
       console.log(window.location.href);
       let path = ''
-      if (window.location.href.includes('/')) {
-        path = window.location.href.split('/')[1]
+      if (window.location.href.includes('github.io/')) {
+        path = window.location.href.split('github.io/')[1]
         if (path.includes('?')) path = path.split('?')[0]
         path += '/'
       }

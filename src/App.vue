@@ -129,9 +129,11 @@ export default {
           path = path.split('?')[0]
         if (path.includes('/')) 
           path = path.split('/')[0]
-        path += '/'
+        console.log('path: ' + path);
       }
+      console.log('path: ' + path);
       this.$store.dispatch('settings/setUrlPath', path)
+        console.log('this.urlPath: ' + this.urlPath);
       await Promise.all([
         primaryWeapons = this.fetchJson(`${this.urlPath}defaults/primaryWeapons.json`),
         secondaryWeapons = this.fetchJson(`${this.urlPath}defaults/secondaryWeapons.json`),

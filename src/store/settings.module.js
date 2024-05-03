@@ -11,6 +11,7 @@ export default {
   },
   actions: {
     setUrlPath({ commit }, data) {
+      console.log('setting: ' + data);
       commit('storeUrlPath', data)
     }
   },

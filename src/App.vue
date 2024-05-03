@@ -30,7 +30,7 @@
           :style="`cursor: pointer; width: 300px; ${faction.id == storeFaction.id ? 'border-bottom: 3px dashed rgb(200,200,0)' : ''}`"
           @click="selectedFaction = faction"
           >
-          <v-img height="100%" :src="`${faction.tabImage}`"></v-img>
+          <v-img height="100%" :src="`${urlPath}${faction.tabImage}`"></v-img>
         </div>
       </div>
 
@@ -127,6 +127,9 @@ export default {
         path = window.location.href.split('github.io/')[1]
         if (path.includes('?')) 
           path = path.split('?')[0]
+        if (path.includes('/')) 
+          path = path.split('/')[0]
+        path += '/'
       }
       this.$store.dispatch('settings/setUrlPath', path)
       await Promise.all([

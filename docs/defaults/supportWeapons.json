@@ -101,7 +101,7 @@
                         "value": 0
                     },
                     {
-                        "categoryId": 4,
+                        "categoryId": 2,
                         "value": 1
                     },
                     {
@@ -135,7 +135,7 @@
                         "value": 0
                     },
                     {
-                        "categoryId": 4,
+                        "categoryId": 2,
                         "value": 1
                     },
                     {
@@ -153,6 +153,90 @@
                     {
                         "categoryId": 6,
                         "value": 5
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 0
+                    }
+
+                ]
+            }
+        
+        ]
+    },
+    {
+        "id": 7,
+        "name": "AC-8 Autocannon",
+        "urls": [
+            {
+                "name": "Wiki",
+                "url": "https://helldivers.fandom.com/wiki/AC-8_Autocannon"
+            }
+        ],
+        "type": "Shoulder-mounted tank cannon",
+        "backpackAmmunition": true,
+        "stats": [
+        
+            {
+                "factionId": 1,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 4
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 2
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 0
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 4
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 7,
+                        "value": 0
+                    }
+
+                ]
+            },
+            {
+                "factionId": 2,
+                "capabilities": [
+                    {
+                        "categoryId": 1,
+                        "value": 4
+                    },
+                    {
+                        "categoryId": 2,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 3,
+                        "value": 2
+                    },
+                    {
+                        "categoryId": 4,
+                        "value": 1
+                    },
+                    {
+                        "categoryId": 5,
+                        "value": 5
+                    },
+                    {
+                        "categoryId": 6,
+                        "value": 0
                     },
                     {
                         "categoryId": 7,

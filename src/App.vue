@@ -129,6 +129,7 @@ export default {
       supportWeapons: (state) => state.equipment.supportWeapons,
       backpacks: (state) => state.equipment.backpacks,
       grenades: (state) => state.equipment.grenades,
+      loadouts: (state) => state.equipment.loadouts,
 
       factions: (state) => state.types.factions,
       storeFaction: (state) => state.types.selectedFaction,
@@ -230,20 +231,22 @@ export default {
       this.$store.dispatch('types/clearData')
       this.$store.dispatch('equipment/clearData')
     },
-    resetToDefaults() {
+    async resetToDefaults() {
       if (!confirm('Are you sure? You are about to delete any changes that you made.')) return
       this.clearStoreData()
-      this.populateDefaults()
+      await this.populateDefaults()
+      location.reload(true);
     },
     exportStore() {
       const data = {
         primaryWeapons: this.primaryWeapons,
-        secondaryWeapons: this.secondaryWeapon,
+        secondaryWeapons: this.secondaryWeapons,
         supportWeapons: this.supportWeapons,
         backpacks: this.backpacks,
         grenades: this.grenades,
         categories: this.categories,
-        factions: this.factions
+        factions: this.factions,
+        loadouts: this.loadouts
       }
       const jsonData = JSON.stringify(data)
       const blobData = new Blob([jsonData], {type: 'text/plain'})
@@ -271,13 +274,14 @@ export default {
         reader.onload = e => {
           const importedData = JSON.parse(e.target.result);
           this.clearStoreData()
-          this.$store.dispatch('equipment/setPrimaryWeaponArray', importedData.primaryWeapons)
-          this.$store.dispatch('equipment/setSecondaryWeaponArray', importedData.secondaryWeapons)
-          this.$store.dispatch('equipment/setSupportWeaponArray', importedData.supportWeapons)
-          this.$store.dispatch('equipment/setBackpackArray', importedData.backpacks)
-          this.$store.dispatch('equipment/setGrenadeArray', importedData.grenades)
-          this.$store.dispatch('types/setCategoryArray', importedData.categories)
-          this.$store.dispatch('types/setFactionArray', importedData.factions)
+          this.$store.dispatch('equipment/setPrimaryWeaponArray', importedData.primaryWeapons ? importedData.primaryWeapons : [])
+          this.$store.dispatch('equipment/setSecondaryWeaponArray', importedData.secondaryWeapons ? importedData.secondaryWeapons : [])
+          this.$store.dispatch('equipment/setSupportWeaponArray', importedData.supportWeapons ? importedData.supportWeapons : [])
+          this.$store.dispatch('equipment/setBackpackArray', importedData.backpacks ? importedData.backpacks : [])
+          this.$store.dispatch('equipment/setGrenadeArray', importedData.grenades ? importedData.grenades : [])
+          this.$store.dispatch('equipment/replaceLoadouts', importedData.loadouts ? importedData.loadouts : [])
+          this.$store.dispatch('types/setCategoryArray', importedData.categories ? importedData.categories : [])
+          this.$store.dispatch('types/setFactionArray', importedData.factions ? importedData.factions : [])
         };
         reader.readAsText(e.target.files[0])
         // Do whatever you need with the file, liek reading it with FileReader

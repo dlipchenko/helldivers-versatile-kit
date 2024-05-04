@@ -7,6 +7,7 @@ export default {
     supportWeapons: [],
     backpacks: [],
     grenades: [],
+    loadouts: [],
   }),
   mutations: {
     storePrimaryWeaponArray (state, data) {
@@ -39,12 +40,22 @@ export default {
     spliceGrenadeArray (state, spliceData) {
       state.grenades.splice(spliceData.index, spliceData.delete ? spliceData.delete : 0, spliceData.data)
     },
+    storeLoadoutArray (state, data) {
+      state.loadouts = data
+    },
+    spliceLoadoutArray (state, spliceData) {
+      state.loadouts.splice(spliceData.index, spliceData.delete ? spliceData.delete : 0, spliceData.data)
+    },
+    pushLoadoutArray (state, data) {
+      state.loadouts.push(data)
+    },
     clearData (state) {
       state.primaryWeapons = []
       state.secondaryWeapons = []
       state.supportWeapons = []
       state.backpacks = []
       state.grenades = []
+      state.loadouts = []
     },
   },
   actions: {
@@ -77,6 +88,16 @@ export default {
     },
     spliceGrenadeArray ({ commit }, spliceData) {
       commit('spliceGrenadeArray', spliceData)
+    },
+    replaceLoadouts({commit}, data) {
+      commit('storeLoadoutArray', data)
+    },
+    addLoadout ({ commit }, data) {
+      commit('pushLoadoutArray', data)
+    },
+    updateLoadout ({ commit, state }, data) {
+      const index = state.loadouts.findIndex(x => x.id == data.id)
+      if (index > -1) commit('spliceLoadoutArray', { data: data, delete: 1, index: index })
     },
     clearData({ commit }) {
       commit('clearData')

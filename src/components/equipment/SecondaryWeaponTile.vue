@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="tile hover pa-3"
+    class="tile equipment-tile hover pa-3"
     :style="`background-color: rgb(23,23,23) ;background-image: url('${secondaryWeapon.imageSource}'); background-size: cover; background-position: top; background-size: 416px; ${!editing ? 'cursor: pointer;' : ''}`">
     <v-row :style="`height: 214px;${editing ? 'border-bottom: 3px dashed rgb(150,150,0);' : ''}`" @click="handleTileClick">
       <v-col cols="5" style="text-align: initial;">
@@ -186,17 +186,3 @@
     }
   }
 </script>
-<style>
-  .tile {
-    border-radius: 10px;
-    min-height: 200px;
-    border: solid 2px rgb(0,0,0);
-    box-shadow: 0px 0px 5px 2px rgba(255,255,0,0) inset, 0px 0px 12px 10px rgba(255,255,0,0) inset, -5px 5px 5px 2px rgba(255,255,255,0.2) inset, 6px -6px 6px 4px rgba(0,0,0,0.2) inset;
-    transition: box-shadow 0.5s;
-  }
-  .tile:hover {
-    border: solid 2px rgb(200,200,0);
-    box-shadow: 0px 0px 5px 2px rgba(255,255,0,0.6) inset, 0px 0px 12px 10px rgba(255,255,0,0.3) inset, -5px 5px 5px 2px rgba(255,255,255,0.2) inset, 6px -6px 6px 4px rgba(0,0,0,0.2) inset;
-    transition: box-shadow 0.5s;
-  }
-</style>

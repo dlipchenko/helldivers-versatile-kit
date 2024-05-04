@@ -1,6 +1,6 @@
 <template>
   <div class="pl-3 pr-3">
-    <v-row class="text-center pb-2">
+    <v-row class="text-center pb-2 mt-2">
       <v-col cols="12" class="text-h5">
         Primary Weapons
       </v-col>
@@ -24,19 +24,19 @@
         <support-weapon-tile :supportWeapon="supportWeapon" />
       </v-col>
     </v-row>
-    <v-row class="text-center pb-2" style="border-bottom: dashed gray 1px;">
+    <v-row class="text-center pb-2">
       <v-col cols="12" class="text-h5">
         Backpacks
       </v-col>
-      <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="backpack in backpacks" :key="`backpack-${backpack.id}`" style="border-radius: 5px; border: 1px solid darkgrey">
+      <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="backpack in backpacks" :key="`backpack-${backpack.id}`">
         <backpack-tile :backpack="backpack" />
       </v-col>
     </v-row>
-    <v-row class="text-center pb-2" style="border-bottom: dashed gray 1px;">
+    <v-row class="text-center pb-2">
       <v-col cols="12" class="text-h5">
         Grenades
       </v-col>
-      <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="grenade in grenades" :key="`grenade-${grenade.id}`" style="border-radius: 5px; border: 1px solid darkgrey">
+      <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="grenade in grenades" :key="`grenade-${grenade.id}`">
         <grenade-tile :grenade="grenade" />
       </v-col>
     </v-row>

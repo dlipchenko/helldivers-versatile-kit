@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-tabs v-model="selectedTab">
+  <div>
+    <v-tabs v-model="selectedTab" class="d-flex justify-center">
       <v-tab key="equipment">
         Equipment
       </v-tab>
@@ -20,7 +20,7 @@
         <nominals-section />
       </v-tab-item>
     </v-tabs-items>
-  </v-container>
+  </div>
 </template>
 
 <script>

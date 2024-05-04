@@ -6,7 +6,7 @@
       class="pl-0 pb-0"
       dark
     >
-      <div class="d-flex align-center" style="height: inherit; min-width: 700px;">
+      <div class="d-flex align-center" style="height: inherit;">
         <v-img
           alt="Vuetify Logo"
           class="shrink mr-2"
@@ -14,14 +14,15 @@
           src="images/header-logo.png"
           transition="scale-transition"
           height="100%"
-          width="350px"
-        />
+        >
+          <span style="font-size: 40px; float: left; font-family: OCR A Std, monospace;">HD2 Loadouts</span>
+        </v-img>
 
-        <span style="font-size: 36px; font-family: OCR A Std, monospace;">HD2 Kit Assembler</span>
+        
       </div>
-
+      
       <v-spacer></v-spacer>
-      <div v-if="storeFaction" class="pl-8 pr-8 d-flex" style="align-self: end;">
+      <div v-if="storeFaction && (screenSize == 'lg' || screenSize == 'xl')" class="pl-8 pr-8 d-flex" style="align-self: end;">
         <div 
           v-for="faction in factions" 
           :key="`selected-faction-${faction.id}`" 
@@ -36,39 +37,78 @@
       </div>
 
       <v-spacer></v-spacer>
+      <template v-if="screenSize == 'xl'">
+        <v-btn
+          class="mr-2"
+          outlined
+          color="success"
+          @click="exportStore()"
+        >
+          <span>Export</span>
+        </v-btn>
+        <v-btn
+          class="mr-2"
+          outlined
+          color="primary"
+          @click="importStore()"
+        >
+          <span>Import</span>
+        </v-btn>
+        <v-btn
+          outlined
+          color="error"
+          @click="resetToDefaults()"
+        >
+          <span>Reset All Defaults</span>
+        </v-btn>
+      </template>
+      <v-menu
+        v-else
+        bottom
+        right
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-app-bar-nav-icon
+            style="position: absolute; top: 2px; right: 2px;"
+            v-bind="attrs"
+            v-on="on" />
+        </template>
 
-      <v-btn
-        class="mr-2"
-        outlined
-        color="success"
-        @click="exportStore()"
-      >
-        <span>Export</span>
-      </v-btn>
-      <v-btn
-        class="mr-2"
-        outlined
-        color="primary"
-        @click="importStore()"
-      >
-        <span>Import</span>
-      </v-btn>
+        <v-list>
+          <v-list-item @click="exportStore()">
+            <v-list-item-title>Export</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="importStore()">
+            <v-list-item-title>Import</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="resetToDefaults()">
+            <v-list-item-title>Reset</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <input 
           ref="uploader" 
           class="d-none" 
           type="file" 
           @change="onFileChanged"
       >
-      <v-btn
-        outlined
-        color="error"
-        @click="resetToDefaults()"
-      >
-        <span>Reset All Defaults</span>
-      </v-btn>
     </v-app-bar>
 
     <v-main>
+      <div v-if="screenSize != 'lg' && screenSize != 'xl'" class="d-flex justify-center mt-1 mb-1">
+        <div 
+          v-for="faction in factions" 
+          :key="`selected-faction-${faction.id}`" 
+          class="pa-0 d-flex justify-center" 
+          :value="faction.id" 
+          :style="`background-image: url(${faction.tabImage}); background-size: cover; background-position: center; cursor: pointer; width: 300px; ${faction.id == storeFaction.id ? 'border-bottom: 3px dashed rgb(200,200,0)' : ''}`"
+          @click="selectedFaction = faction"
+        >
+          <!--<v-img height="100%" :src="`${faction.tabImage}`" />-->
+          <span class="text-h4" style="color: rgb(255,255,0);">{{ faction.name }}</span>
+        </div>
+
+      </div>
       <router-view/>
     </v-main>
   </v-app>
@@ -80,7 +120,6 @@ import { mapState } from 'vuex'// import { mapGetters, mapState, mapMutations } 
 export default {
   name: 'App',
   created() {
-    this.$vuetify.theme.dark = true;
     this.populateDefaults();
   },
   computed: {
@@ -106,7 +145,10 @@ export default {
         this.$store.dispatch('types/setSelectedFaction', faction)
 
       }
-    }
+    },
+    screenSize () {
+      return this.$vuetify.breakpoint.name;
+    },
   },
 
   data: () => ({

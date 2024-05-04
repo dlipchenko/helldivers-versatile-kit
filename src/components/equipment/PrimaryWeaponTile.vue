@@ -1,8 +1,8 @@
 <template>
   <div 
     class="tile hover pa-3"
-    :style="`background-image: url('${primaryWeapon.imageSource}'); background-size: cover; background-position: top; background-size: 100%; ${!editing ? 'cursor: pointer;' : ''}`">
-    <v-row style="height: 200px;" @click="handleTileClick">
+    :style="`background-color: rgb(23,23,23) ;background-image: url('${primaryWeapon.imageSource}'); background-size: cover; background-position: top; background-size: 416px; ${!editing ? 'cursor: pointer;' : ''}`">
+    <v-row :style="`height: 214px;${editing ? 'border-bottom: 3px dashed rgb(150,150,0);' : ''}`" @click="handleTileClick">
       <v-col cols="5" style="text-align: initial;">
         <div 
           class="pb-3"
@@ -20,42 +20,44 @@
 
       </v-col>
     </v-row>
-    <v-row v-show="editing" style="border-top: 3px dashed rgb(150,150,0); transition: display;" class="mt-6">
-      <v-col cols="6" class="d-flex align-center">
-        <p class="text-h4 mb-0 ">Capabilities</p>
-      </v-col>
-      <v-col cols="6" class="d-flex align-center">
-        <v-btn class="success mr-2" @click="savePrimaryWeapon()" >
-          Save
-        </v-btn>
-        <v-btn class="error" @click="cancelEdit()">
-          Cancel
-        </v-btn>
-      </v-col>
-      <v-col v-for="category in categories" :key="`edit-primary-weapon-${primaryWeapon.id}-category-${category.id}`" cols="12" class="pt-0 pb-0">
-        <div  v-if="weaponCapabilityIndex(category) > -1" style="display: flex;">
-          <v-tooltip right max-width="350px">
-            <template v-slot:activator="{ on, attrs }">
-              <span
-                v-bind="attrs"
-                v-on="on">
-                {{ category.shortName }}
-              </span>
-            </template>
-            <span>{{ category.name }} - {{ category.description.find(x => x.factionId == selectedFaction.id).text }}</span>
-          </v-tooltip>
-          
-          <v-slider 
-            v-model="primaryWeaponEdit.stats[factionIndex].capabilities[weaponCapabilityIndex(category)].value" 
-            min="0" 
-            max="5"
-            :tick-labels="['0','1','2','3','4','5']"
-            class="ml-4"
-            ticks="always"
-          ></v-slider>
-        </div>
-      </v-col>
-    </v-row>
+    <v-slide-y-transition>
+      <v-row v-if="editing">
+        <v-col cols="6" class="d-flex align-center">
+          <p class="text-h4 mb-0 ">Capabilities</p>
+        </v-col>
+        <v-col cols="6" class="d-flex align-center justify-end">
+          <v-btn class="success mr-2" @click="savePrimaryWeapon()" >
+            Save
+          </v-btn>
+          <v-btn class="error mr-3" @click="cancelEdit()">
+            Cancel
+          </v-btn>
+        </v-col>
+        <v-col v-for="category in categories" :key="`edit-primary-weapon-${primaryWeapon.id}-category-${category.id}`" cols="12" class="pt-0 pb-0">
+          <div  v-if="weaponCapabilityIndex(category) > -1" style="display: flex;">
+            <v-tooltip right max-width="350px">
+              <template v-slot:activator="{ on, attrs }">
+                <span
+                  v-bind="attrs"
+                  v-on="on">
+                  {{ category.shortName }}
+                </span>
+              </template>
+              <span>{{ category.name }} - {{ category.description.find(x => x.factionId == selectedFaction.id).text }}</span>
+            </v-tooltip>
+            
+            <v-slider 
+              v-model="primaryWeaponEdit.stats[factionIndex].capabilities[weaponCapabilityIndex(category)].value" 
+              min="0" 
+              max="5"
+              :tick-labels="['0','1','2','3','4','5']"
+              class="ml-4"
+              ticks="always"
+            ></v-slider>
+          </div>
+        </v-col>
+      </v-row>
+    </v-slide-y-transition>
   </div>
 </template>
 
@@ -188,6 +190,7 @@
   .tile {
     border-radius: 10px;
     min-height: 200px;
+    transition: height 5s;
     border: solid 2px rgb(0,0,0);
     box-shadow: 0px 0px 5px 2px rgba(255,255,0,0) inset, 0px 0px 12px 10px rgba(255,255,0,0) inset, -5px 5px 5px 2px rgba(255,255,255,0.2) inset, 6px -6px 6px 4px rgba(0,0,0,0.2) inset;
     transition: box-shadow 0.5s;

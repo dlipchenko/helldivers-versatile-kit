@@ -1,10 +1,10 @@
 <template>
-  <v-container>
+  <div class="pl-3 pr-3">
     <v-row class="text-center pb-2">
       <v-col cols="12" class="text-h5">
         Primary Weapons
       </v-col>
-      <v-col cols="3" v-for="primaryWeapon in primaryWeapons" :key="`primary-weapon-${primaryWeapon.id}`">
+      <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="primaryWeapon in primaryWeapons" :key="`primary-weapon-${primaryWeapon.id}`">
         <primary-weapon-tile :primaryWeapon="primaryWeapon" />
       </v-col>
     </v-row>
@@ -12,7 +12,7 @@
       <v-col cols="12" class="text-h5">
         Secondary Weapons
       </v-col>
-      <v-col cols="3" v-for="secondaryWeapon in secondaryWeapons" :key="`secondary-weapon-${secondaryWeapon.id}`">
+      <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="secondaryWeapon in secondaryWeapons" :key="`secondary-weapon-${secondaryWeapon.id}`">
         <secondary-weapon-tile :secondaryWeapon="secondaryWeapon" />
       </v-col>
     </v-row>
@@ -20,7 +20,7 @@
       <v-col cols="12" class="text-h5">
         Support Weapons
       </v-col>
-      <v-col cols="3" v-for="supportWeapon in supportWeapons" :key="`support-weapon-${supportWeapon.id}`">
+      <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="supportWeapon in supportWeapons" :key="`support-weapon-${supportWeapon.id}`">
         <support-weapon-tile :supportWeapon="supportWeapon" />
       </v-col>
     </v-row>
@@ -28,7 +28,7 @@
       <v-col cols="12" class="text-h5">
         Backpacks
       </v-col>
-      <v-col cols="3" v-for="backpack in backpacks" :key="`backpack-${backpack.id}`" style="border-radius: 5px; border: 1px solid darkgrey">
+      <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="backpack in backpacks" :key="`backpack-${backpack.id}`" style="border-radius: 5px; border: 1px solid darkgrey">
         <backpack-tile :backpack="backpack" />
       </v-col>
     </v-row>
@@ -36,11 +36,11 @@
       <v-col cols="12" class="text-h5">
         Grenades
       </v-col>
-      <v-col cols="3" v-for="grenade in grenades" :key="`grenade-${grenade.id}`" style="border-radius: 5px; border: 1px solid darkgrey">
+      <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="grenade in grenades" :key="`grenade-${grenade.id}`" style="border-radius: 5px; border: 1px solid darkgrey">
         <grenade-tile :grenade="grenade" />
       </v-col>
     </v-row>
-  </v-container>
+  </div>
 </template>
 
 <script>

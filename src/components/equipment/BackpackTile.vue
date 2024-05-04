@@ -1,7 +1,7 @@
 <template>
   <div 
     class="tile hover pa-3"
-    :style="`background-image: url('${supportWeapon.imageSource}'); background-size: cover; background-position: top; background-size: 100%; ${!editing ? 'cursor: pointer;' : ''}`">
+    :style="`background-image: url('${backpack.imageSource}'); background-size: cover; background-position: top; background-size: 100%; ${!editing ? 'cursor: pointer;' : ''}`">
     <v-row style="height: 200px;" @click="handleTileClick">
       <v-col cols="5" style="text-align: initial;">
         <div 
@@ -9,9 +9,9 @@
           >
           
           <p class="text-h5 mb-0">
-            {{ supportWeapon.name }}
+            {{ backpack.name }}
           </p>
-          <span>{{ supportWeapon.type }}</span>
+          <span>{{ backpack.type }}</span>
         </div>
 
       </v-col>
@@ -25,14 +25,14 @@
         <p class="text-h4 mb-0 ">Capabilities</p>
       </v-col>
       <v-col cols="6" class="d-flex align-center">
-        <v-btn class="success mr-2" @click="saveSupportWeapon()" >
+        <v-btn class="success mr-2" @click="saveBackpack()" >
           Save
         </v-btn>
         <v-btn class="error" @click="cancelEdit()">
           Cancel
         </v-btn>
       </v-col>
-      <v-col v-for="category in categories" :key="`edit-support-weapon-${supportWeapon.id}-category-${category.id}`" cols="12" class="pt-0 pb-0">
+      <v-col v-for="category in categories" :key="`edit-support-weapon-${backpack.id}-category-${category.id}`" cols="12" class="pt-0 pb-0">
         <div  v-if="weaponCapabilityIndex(category) > -1" style="display: flex;">
           <v-tooltip right max-width="350px">
             <template v-slot:activator="{ on, attrs }">
@@ -46,7 +46,7 @@
           </v-tooltip>
           
           <v-slider 
-            v-model="supportWeaponEdit.stats[factionIndex].capabilities[weaponCapabilityIndex(category)].value" 
+            v-model="backpackEdit.stats[factionIndex].capabilities[weaponCapabilityIndex(category)].value" 
             min="0" 
             max="5"
             :tick-labels="['0','1','2','3','4','5']"
@@ -63,41 +63,41 @@
   import VueApexCharts from 'vue-apexcharts'
   import { mapState } from 'vuex'// import { mapGetters, mapState, mapMutations } from 'vuex';
   export default {
-    name: 'SupportWeaponTile',
+    name: 'BackpackTile',
     components: {
       VueApexCharts
     },
     data: () => ({
       editing: false,
-      supportWeaponEdit: null
+      backpackEdit: null
     }),
     props: {
-      supportWeapon: {
+      backpack: {
         type: Object,
         default: () => {}
       }
     },
     watch: {
-      supportWeapon: {
+      backpack: {
         immediate: true,
         handler(){
-          this.copySupportWeapon()
+          this.copyBackpack()
         },
       }
     },
     computed: {
       ...mapState({
         categories: (state) => state.types.categories,
-        supportWeapons: (state) => state.equipment.supportWeapons,
+        backpacks: (state) => state.equipment.backpacks,
         selectedFaction: (state) => state.types.selectedFaction,
       }),
       factionIndex() {
-        return this.supportWeaponEdit.stats.findIndex(x => x.factionId == this.selectedFaction.id)
+        return this.backpackEdit.stats.findIndex(x => x.factionId == this.selectedFaction.id)
       },
       series() {
-        if (!this.supportWeaponEdit || !this.supportWeaponEdit.stats || !this.supportWeaponEdit.stats.length) return []
+        if (!this.backpackEdit || !this.backpackEdit.stats || !this.backpackEdit.stats.length) return []
         
-        let capabilities = [...this.supportWeaponEdit.stats.find(x => x.factionId == this.selectedFaction.id).capabilities]
+        let capabilities = [...this.backpackEdit.stats.find(x => x.factionId == this.selectedFaction.id).capabilities]
         capabilities = capabilities.sort((a,b) => a.id > b.id)
         capabilities = capabilities.map(x => { return x.value })
         return [{
@@ -158,23 +158,23 @@
       },
     },
     methods: {
-      copySupportWeapon() {
-        const supportWeaponJson = JSON.stringify(this.supportWeapon)
-        this.supportWeaponEdit = JSON.parse(supportWeaponJson)
+      copyBackpack() {
+        const backpackJson = JSON.stringify(this.backpack)
+        this.backpackEdit = JSON.parse(backpackJson)
       },
       weaponCapabilityIndex (category) {
-        if (!this.supportWeaponEdit) return -1
-        return this.supportWeaponEdit.stats[this.factionIndex].capabilities.findIndex(x => x.categoryId == category.id)
+        if (!this.backpackEdit) return -1
+        return this.backpackEdit.stats[this.factionIndex].capabilities.findIndex(x => x.categoryId == category.id)
       },
-      saveSupportWeapon() {
-        const supportWeaponIndex = this.supportWeapons.findIndex(x => x.id == this.supportWeaponEdit.id)
-        this.supportWeaponEdit.modified = true
-        this.$store.dispatch('equipment/spliceSupportWeaponArray', { index: supportWeaponIndex, delete: 1, data: this.supportWeaponEdit})
-        this.copySupportWeapon()
+      saveBackpack() {
+        const backpackIndex = this.backpacks.findIndex(x => x.id == this.backpackEdit.id)
+        this.backpackEdit.modified = true
+        this.$store.dispatch('equipment/spliceBackpackArray', { index: backpackIndex, delete: 1, data: this.backpackEdit})
+        this.copyBackpack()
         this.editing = false
       },
       cancelEdit() {
-        this.copySupportWeapon()
+        this.copyBackpack()
         this.editing = false
       },
       handleTileClick() {

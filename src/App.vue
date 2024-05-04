@@ -128,11 +128,8 @@ export default {
         path = window.location.href.split('github.io/')[1]
         if (path.includes('?')) 
           path = path.split('?')[0]
-        console.log('path: ' + path);
       }
-      console.log('path: ' + path);
       this.$store.dispatch('settings/setUrlPath', path)
-        console.log('this.urlPath: ' + this.urlPath);
       await Promise.all([
         primaryWeapons = this.fetchJson(`${this.urlPath}defaults/primaryWeapons.json`),
         secondaryWeapons = this.fetchJson(`${this.urlPath}defaults/secondaryWeapons.json`),
@@ -144,7 +141,13 @@ export default {
       ]).then(results => {
         [primaryWeapons, secondaryWeapons, supportWeapons, backpacks, grenades, factions, categories] = results
       });
-
+      /*console.log(primaryWeapons);
+      console.log(secondaryWeapons);
+      console.log(supportWeapons);
+      console.log(backpacks);
+      console.log(grenades);
+      console.log(factions);
+      console.log(categories);*/
       this.updateStore('types', 'Category', this.categories, categories);
       this.updateStore('types', 'Faction', this.factions, factions);
       this.updateStore('equipment', 'PrimaryWeapon', this.primaryWeapons, primaryWeapons);

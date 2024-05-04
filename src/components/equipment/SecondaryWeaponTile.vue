@@ -168,6 +168,7 @@
       },
       saveSecondaryWeapon() {
         const secondaryWeaponIndex = this.secondaryWeapons.findIndex(x => x.id == this.secondaryWeaponEdit.id)
+        this.secondaryWeaponEdit.modified = true
         this.$store.dispatch('equipment/spliceSecondaryWeaponArray', { index: secondaryWeaponIndex, delete: 1, data: this.secondaryWeaponEdit})
         this.copySecondaryWeapon()
         this.editing = false

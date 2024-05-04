@@ -20,7 +20,7 @@
 
       </v-col>
     </v-row>
-    <v-row v-show="editing" style="border-top: 3px dashed rgb(150,150,0)" class="mt-6">
+    <v-row v-show="editing" style="border-top: 3px dashed rgb(150,150,0); transition: display;" class="mt-6">
       <v-col cols="6" class="d-flex align-center">
         <p class="text-h4 mb-0 ">Capabilities</p>
       </v-col>
@@ -168,6 +168,7 @@
       },
       savePrimaryWeapon() {
         const primaryWeaponIndex = this.primaryWeapons.findIndex(x => x.id == this.primaryWeaponEdit.id)
+        this.primaryWeaponEdit.modified = true
         this.$store.dispatch('equipment/splicePrimaryWeaponArray', { index: primaryWeaponIndex, delete: 1, data: this.primaryWeaponEdit})
         this.copyPrimaryWeapon()
         this.editing = false

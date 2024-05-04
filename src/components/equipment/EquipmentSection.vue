@@ -29,7 +29,7 @@
         Backpacks
       </v-col>
       <v-col cols="3" v-for="backpack in backpacks" :key="`backpack-${backpack.id}`" style="border-radius: 5px; border: 1px solid darkgrey">
-        {{ backpack }}
+        <backpack-tile :backpack="backpack" />
       </v-col>
     </v-row>
     <v-row class="text-center pb-2" style="border-bottom: dashed gray 1px;">
@@ -37,7 +37,7 @@
         Grenades
       </v-col>
       <v-col cols="3" v-for="grenade in grenades" :key="`grenade-${grenade.id}`" style="border-radius: 5px; border: 1px solid darkgrey">
-        {{ grenade }}
+        <grenade-tile :grenade="grenade" />
       </v-col>
     </v-row>
   </v-container>
@@ -48,12 +48,16 @@
   import PrimaryWeaponTile from '@/components/equipment/PrimaryWeaponTile.vue';
   import SecondaryWeaponTile from '@/components/equipment/SecondaryWeaponTile.vue';
   import SupportWeaponTile from '@/components/equipment/SupportWeaponTile.vue';
+  import BackpackTile from '@/components/equipment/BackpackTile.vue';
+  import GrenadeTile from '@/components/equipment/GrenadeTile.vue';
   export default {
     name: 'EquipmentManagementTemplate',
     components: {
       PrimaryWeaponTile,
       SecondaryWeaponTile,
-      SupportWeaponTile
+      SupportWeaponTile,
+      BackpackTile,
+      GrenadeTile,
     },
     data: () => ({
     }),

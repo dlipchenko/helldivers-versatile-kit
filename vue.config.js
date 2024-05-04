@@ -5,4 +5,5 @@ module.exports = defineConfig({
     'vuex-persist'
   ],
   publicPath: process.env.NODE_ENV === "production" ? "/helldivers-versatile-kit/" : "/",
+  outputDir: 'docs'
 })

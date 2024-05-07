@@ -32,7 +32,7 @@
         </v-expansion-panel-content>
         <v-expansion-panel-content v-if="section.id == 4">
           <v-row class="text-center pb-2 mt-2">
-            <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="backpack in backpackS" :key="`backpack-${backpack.id}`">
+            <v-col cols="12" xl="3" lg="4" md="6" sm="6" xs="12" v-for="backpack in backpacks" :key="`backpack-${backpack.id}`">
               <backpack-tile :backpack="backpack" />
             </v-col>
           </v-row>

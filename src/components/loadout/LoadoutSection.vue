@@ -15,7 +15,7 @@
       </v-col>
       <v-col cols="12" xl="4" lg="6" md="12">
         <div 
-          class="tile loadout-tile d-flex align-center justify-center yellow--text" 
+          class="tile loadout-tile d-flex align-center justify-center yellow--text mt-1" 
           style="cursor: pointer;"
           @click="newLoadout()"
         >

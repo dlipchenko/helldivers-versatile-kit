@@ -81,7 +81,6 @@
         if (this.selectedSupportWeapon) {
           const factionStats = this.selectedSupportWeapon.stats.find(x => x.factionId == this.selectedFaction.id)
           categories.forEach(cat => {
-            //console.log(cat);
             const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
             if (capability && (cat.value == null || capability.value > cat.value)) cat.value = capability.value
           })
@@ -104,7 +103,6 @@
             if (cat.value == null) cat.value = 0
           })
         const loadoutCapabilities = categories.map(x => { return x.value })
-        //console.log(loadoutCapabilities);
         return [{
           name: 'Series 1',
           data: loadoutCapabilities
@@ -126,16 +124,15 @@
           },
           colors: [
             function ({ value }) {
-              console.log(value);
-                  switch(value) {
-                  case 0: return '#000000'
-                  case 1: return 'rgb(175,0,0)'
-                  case 2: return 'rgb(175,50,0)'
-                  case 3: return 'rgb(175,100,0)'
-                  case 4: return 'rgb(150,150,0)'
-                  case 5: return 'rgb(25,100,0)'
-                }
+                switch(value) {
+                case 0: return '#000000'
+                case 1: return 'rgb(175,0,0)'
+                case 2: return 'rgb(175,50,0)'
+                case 3: return 'rgb(175,100,0)'
+                case 4: return 'rgb(150,150,0)'
+                case 5: return 'rgb(25,100,0)'
               }
+            }
           ],
           xaxis: {
             categories: [
@@ -187,5 +184,9 @@
   }
   .compact-column-chart div div.apexcharts-tooltip {
     display: none;
+  }
+  .compact-column-chart div svg g g g path.apexcharts-bar-area {
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
   }
 </style>

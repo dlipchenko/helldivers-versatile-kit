@@ -2,7 +2,7 @@
   <div 
     class="tile equipment-tile hover pa-3"
     :style="`background-color: rgb(23,23,23) ;background-image: url('${secondaryWeapon.imageSource}'); background-size: cover; background-position: top; background-size: 416px; ${!editing ? 'cursor: pointer;' : ''}`">
-    <v-row :style="`height: 214px;${editing ? 'border-bottom: 3px dashed rgb(150,150,0);' : ''}`" @click="handleTileClick">
+    <v-row :style="`height: 216px;${editing ? 'border-bottom: 3px dashed rgb(150,150,0);' : ''}`" @click="handleTileClick">
       <v-col cols="5" style="text-align: initial;">
         <div 
           class="pb-3"

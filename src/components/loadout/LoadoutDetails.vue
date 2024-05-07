@@ -22,7 +22,7 @@
               v-if="!selectedPrimaryWeapon"
               @click="openEquipmentDialog('Primary Weapon')"
               class="loadout-input-slot ml-1 mr-1" 
-              :style="`width: 100%; height: 70px; align-content: center; font-size: 26px; font-weight: bold; ${loadoutEdit.equipment && loadoutEdit.equipment.primaryWeaponId ? '' : 'cursor: pointer;'}`">
+              :style="`width: 100%; height: 90px; align-content: center; font-size: 26px; font-weight: bold; ${loadoutEdit.equipment && loadoutEdit.equipment.primaryWeaponId ? '' : 'cursor: pointer;'}`">
               <span>Primary</span>
             </div>
             <compact-equipment-tile 
@@ -37,7 +37,7 @@
               v-if="!selectedSecondaryWeapon" 
               @click="openEquipmentDialog('Secondary Weapon')"
               class="loadout-input-slot ml-1 mr-1" 
-              :style="`width: 100%; height: 70px; align-content: center; font-size: 26px; font-weight: bold; ${loadoutEdit.equipment && loadoutEdit.equipment.secondaryWeaponId ? '' : 'cursor: pointer;'}`">
+              :style="`width: 100%; height: 90px; align-content: center; font-size: 26px; font-weight: bold; ${loadoutEdit.equipment && loadoutEdit.equipment.secondaryWeaponId ? '' : 'cursor: pointer;'}`">
               <span>Secondary</span>
             </div>
             <compact-equipment-tile 
@@ -52,7 +52,7 @@
               v-if="!selectedSupportWeapon"
               @click="openEquipmentDialog('Support Weapon')"
               class="loadout-input-slot ml-1 mr-1" 
-              :style="`width: 100%; height: 70px; align-content: center; font-size: 26px; font-weight: bold; ${loadoutEdit.equipment && loadoutEdit.equipment.supportWeaponId ? '' : 'cursor: pointer;'}`">
+              :style="`width: 100%; height: 90px; align-content: center; font-size: 26px; font-weight: bold; ${loadoutEdit.equipment && loadoutEdit.equipment.supportWeaponId ? '' : 'cursor: pointer;'}`">
               <span>Support</span>
             </div>
             <compact-equipment-tile 
@@ -67,7 +67,7 @@
               v-if="!selectedBackpack"
               @click="openEquipmentDialog('Backpack')"
               :class="`${!selectedSupportWeapon || !selectedSupportWeapon.backpackAmmunition ? 'loadout-input-slot' : 'loadout-input-slot-disabled'} ml-1 mr-1`" 
-              :style="`width: 100%; height: 70px; align-content: center; font-size: 26px; font-weight: bold; ${(loadoutEdit.equipment && loadoutEdit.equipment.backpackId) || (selectedSupportWeapon && selectedSupportWeapon.backpackAmmunition) ? '' : 'cursor: pointer;'}`">
+              :style="`width: 100%; height: 90px; align-content: center; font-size: 26px; font-weight: bold; ${(loadoutEdit.equipment && loadoutEdit.equipment.backpackId) || (selectedSupportWeapon && selectedSupportWeapon.backpackAmmunition) ? '' : 'cursor: pointer;'}`">
               <span>Backpack</span>
             </div>
             <compact-equipment-tile 
@@ -82,7 +82,7 @@
               v-if="!selectedGrenade" 
               @click="openEquipmentDialog('Grenade')"
               class="loadout-input-slot ml-1 mr-1" 
-              :style="`width: 100%; height: 70px; align-content: center; font-size: 26px; font-weight: bold; ${loadoutEdit.equipment && loadoutEdit.equipment.grenadeId ? '' : 'cursor: pointer;'}`">
+              :style="`width: 100%; height: 90px; align-content: center; font-size: 26px; font-weight: bold; ${loadoutEdit.equipment && loadoutEdit.equipment.grenadeId ? '' : 'cursor: pointer;'}`">
               <span>Grenade</span>
             </div>
             <compact-equipment-tile 
@@ -109,6 +109,7 @@
             @equipmentClicked="(id) => selectEquipment(id)"
             :equipment="item" 
             :class="`${ selectedEquipmentId == item.id ? 'selected-tile' : 'tile' } mt-1`"
+            :loadoutSeries="series"
           />
         </v-card-text>
         <v-divider></v-divider>
@@ -149,6 +150,7 @@
       showEquipmentSelectionDialog: false,
       selectingEquipmentType: null,
       selectedEquipmentId: null,
+      series: []
     }),
     props: {
       loadoutProp: {
@@ -176,20 +178,40 @@
         selectedFaction: (state) => state.types.selectedFaction,
       }),
       selectedDialogArray() {
+        let arrayJson = ""
+
         switch (this.selectingEquipmentType) {
           case 'Primary Weapon':
-            return this.primaryWeapons
+            arrayJson = JSON.stringify(this.primaryWeapons)
+            break;
           case 'Secondary Weapon':
-            return this.secondaryWeapons
+            arrayJson = JSON.stringify(this.secondaryWeapons)
+            break;
           case 'Support Weapon':
-            return this.supportWeapons
+            arrayJson = JSON.stringify(this.supportWeapons)
+            break;
           case 'Backpack':
-            return this.backpacks
+            arrayJson = JSON.stringify(this.backpacks)
+            break;
           case 'Grenade':
-            return this.grenades
+            arrayJson = JSON.stringify(this.grenades)
+            break;
           default:
             return []
         }
+        let copiedArray = JSON.parse(arrayJson)
+        if (!this.loadoutEdit || !this.loadoutEdit.equipment || (!this.loadoutEdit.equipment.primaryWeaponId && !this.loadoutEdit.equipment.secondaryWeaponId && !this.loadoutEdit.equipment.supportWeaponId && !this.loadoutEdit.equipment.backpackId && !this.loadoutEdit.equipment.grenadeId))
+          return copiedArray // nothing is selected yet, so simple order by id will suffice
+
+        copiedArray.forEach(x => {
+          x.aggregateDifferenceSum = 0
+          let stat = x.stats.find(x => x.factionId == this.selectedFaction.id)
+          for(let i = 0; i < stat.capabilities.length; i++) {
+            if (stat.capabilities[i].value > this.series[0].data[i]) x.aggregateDifferenceSum += stat.capabilities[i].value - this.series[0].data[i]
+          }
+        })
+        copiedArray.sort((a, b) => a.aggregateDifferenceSum < b.aggregateDifferenceSum)
+        return copiedArray
       },
       selectedPrimaryWeapon() {
         if (!this.loadoutEdit || !this.loadoutEdit.equipment || !this.loadoutEdit.equipment.primaryWeaponId) return null
@@ -210,57 +232,6 @@
       selectedGrenade() {
         if (!this.loadoutEdit || !this.loadoutEdit.equipment || !this.loadoutEdit.equipment.grenadeId) return null
         return this.grenades.find(x => x.id == this.loadoutEdit.equipment.grenadeId)
-      },
-      series() {
-        const categoriesJson = JSON.stringify(this.categories)
-        let categories = JSON.parse(categoriesJson)
-        categories = categories.sort((a,b) => a.id > b.id)
-        if (this.selectedPrimaryWeapon) {
-          const factionStats = this.selectedPrimaryWeapon.stats.find(x => x.factionId == this.selectedFaction.id)
-          categories.forEach(cat => {
-            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
-            if (capability) cat.value = capability.value
-          })
-        }
-        if (this.selectedSecondaryWeapon) {
-          const factionStats = this.selectedSecondaryWeapon.stats.find(x => x.factionId == this.selectedFaction.id)
-          categories.forEach(cat => {
-            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
-            if (capability && (cat.value == null || capability.value > cat.value)) cat.value = capability.value
-          })
-        }
-        if (this.selectedSupportWeapon) {
-          const factionStats = this.selectedSupportWeapon.stats.find(x => x.factionId == this.selectedFaction.id)
-          categories.forEach(cat => {
-            //console.log(cat);
-            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
-            if (capability && (cat.value == null || capability.value > cat.value)) cat.value = capability.value
-          })
-        }
-        if (this.selectedBackpack) {
-          const factionStats = this.selectedBackpack.stats.find(x => x.factionId == this.selectedFaction.id)
-          categories.forEach(cat => {
-            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
-            if (capability && (cat.value == null || capability.value > cat.value)) cat.value = capability.value
-          })
-        }
-        if (this.selectedGrenade) {
-          const factionStats = this.selectedGrenade.stats.find(x => x.factionId == this.selectedFaction.id)
-          categories.forEach(cat => {
-            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
-            if (capability && (cat.value == null || capability.value > cat.value)) cat.value = capability.value
-          })
-        }
-        categories.forEach(cat => {
-            if (cat.value == null) cat.value = 0
-          })
-        const loadoutCapabilities = categories.map(x => { return x.value })
-        //console.log(loadoutCapabilities);
-        return [{
-          name: 'Series 1',
-          data: loadoutCapabilities
-        }]
-        
       },
       chartOptions() {
         let categories = [...this.categories]
@@ -316,6 +287,7 @@
     methods: {
       copyLoadout() {
         this.loadoutEdit = { ...this.loadoutProp }
+        this.updateSeries()
       },
       saveLoadout() {
         if (this.loadoutEdit.id == null) {
@@ -354,7 +326,7 @@
             this.loadoutEdit.equipment.grenadeId = this.selectedEquipmentId
             break
         }
-        console.log(this.loadoutEdit);
+        this.updateSeries();
         this.closeEquipmentDialog()
       },
       closeEquipmentDialog() {
@@ -364,6 +336,56 @@
       },
       selectEquipment(id) {
         this.selectedEquipmentId = id
+      },
+      updateSeries() {
+        const categoriesJson = JSON.stringify(this.categories)
+        let categories = JSON.parse(categoriesJson)
+        categories = categories.sort((a,b) => a.id > b.id)
+        if (this.selectedPrimaryWeapon) {
+          const factionStats = this.selectedPrimaryWeapon.stats.find(x => x.factionId == this.selectedFaction.id)
+          categories.forEach(cat => {
+            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
+            if (capability) cat.value = capability.value
+          })
+        }
+        if (this.selectedSecondaryWeapon) {
+          const factionStats = this.selectedSecondaryWeapon.stats.find(x => x.factionId == this.selectedFaction.id)
+          categories.forEach(cat => {
+            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
+            if (capability && (cat.value == null || capability.value > cat.value)) cat.value = capability.value
+          })
+        }
+        if (this.selectedSupportWeapon) {
+          const factionStats = this.selectedSupportWeapon.stats.find(x => x.factionId == this.selectedFaction.id)
+          categories.forEach(cat => {
+            //console.log(cat);
+            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
+            if (capability && (cat.value == null || capability.value > cat.value)) cat.value = capability.value
+          })
+        }
+        if (this.selectedBackpack) {
+          const factionStats = this.selectedBackpack.stats.find(x => x.factionId == this.selectedFaction.id)
+          categories.forEach(cat => {
+            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
+            if (capability && (cat.value == null || capability.value > cat.value)) cat.value = capability.value
+          })
+        }
+        if (this.selectedGrenade) {
+          const factionStats = this.selectedGrenade.stats.find(x => x.factionId == this.selectedFaction.id)
+          categories.forEach(cat => {
+            const capability = factionStats.capabilities.find(fscap => fscap.categoryId == cat.id)
+            if (capability && (cat.value == null || capability.value > cat.value)) cat.value = capability.value
+          })
+        }
+        categories.forEach(cat => {
+            if (cat.value == null) cat.value = 0
+          })
+        const loadoutCapabilities = categories.map(x => { return x.value })
+        //console.log(loadoutCapabilities);
+        this.series = [{
+          name: 'Series 1',
+          data: loadoutCapabilities
+        }]
       }
     }
   }
